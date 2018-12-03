@@ -1,0 +1,988 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% Simple LaTeX CV Template %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% NOTE: If you find that it says                                     %%
+%%                                                                    %%
+%%                           1 of ??                                  %%
+%%                                                                    %%
+%% at the bottom of your first page, this means that the AUX file     %%
+%% was not available when you ran LaTeX on this source. Simply RERUN  %%
+%% LaTeX to get the ``??'' replaced with the number of the last page  %%
+%% of the document. The AUX file will be generated on the first run   %%
+%% of LaTeX and used on the second run to fill in all of the          %%
+%% references.                                                        %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Don't like 10pt? Try 11pt or 12pt
+\documentclass[10pt]{article}
+\RequirePackage[T1]{fontenc}
+
+% LaTeX will typeset using Computer Modern Roman, which a lot of
+% non-mathematicians and non-engineers won't like. Also, a few PDF
+% viewers may not render CMR very well. Instead, Times New Roman can
+% be used. That's what this package does.
+\usepackage{times}
+
+% The automated optical recognition software used to digitize resume
+% information works best with fonts that do not have serifs. This
+% command uses a sans serif font throughout. Uncomment both lines (or at
+% least the second) to restore a Roman font (i.e., a font with serifs).
+% (NOTE: This requires the times package above)
+%\renewcommand{\familydefault}{\sfdefault}
+
+% This is a helpful package that puts math inside length specifications
+\usepackage{calc}
+
+% This package helps LaTeX auto-hyphenate hyphenated words if you use
+% special hyphens. For example, bio\-/mimicry will properly hyphenate
+% ``mimicry'' if necessary.
+\usepackage[shortcuts]{extdash}
+
+% Layout: Puts the section titles on left side of page
+\reversemarginpar
+
+%
+%         PAPER SIZE, PAGE NUMBER, AND DOCUMENT LAYOUT NOTES:
+%
+% The next \usepackage line changes the layout for CV style section
+% headings as marginal notes. It also sets up the paper size as either
+% letter or A4. By default, letter was used. If A4 paper is desired,
+% comment out the letterpaper lines and uncomment the a4paper lines.
+%
+% As you can see, the margin widths and section title widths can be
+% easily adjusted.
+%
+% ALSO: Notice that the includefoot option can be commented OUT in order
+% to put the PAGE NUMBER *IN* the bottom margin. This will make the
+% effective text area larger.
+%
+% IF YOU WISH TO REMOVE THE ``of LASTPAGE'' next to each page number,
+% see the note about the +LP and -LP lines below. Comment out the +LP
+% and uncomment the -LP.
+%
+% IF YOU WISH TO REMOVE PAGE NUMBERS, be sure that the includefoot line
+% is uncommented and ALSO uncomment the \pagestyle{empty} a few lines
+% below.
+%
+
+%% Use these lines for letter-sized paper
+\usepackage[paper=letterpaper,
+            %includefoot, % Uncomment to put page number above margin
+            marginparwidth=1.2in,     % Length of section titles
+            marginparsep=.05in,       % Space between titles and text
+            margin=1in,               % 1 inch margins
+            includemp]{geometry}
+
+%% Use these lines for A4-sized paper
+%\usepackage[paper=a4paper,
+%            %includefoot, % Uncomment to put page number above margin
+%            marginparwidth=30.5mm,    % Length of section titles
+%            marginparsep=1.5mm,       % Space between titles and text
+%            margin=25mm,              % 25mm margins
+%            includemp]{geometry}
+
+%% More layout: Get rid of indenting throughout entire document
+\setlength{\parindent}{0in}
+
+% Provides special list environments and macros to create new ones
+\usepackage[shortlabels]{enumitem}
+
+% Simpler bibsections for CV sections
+% (thanks to natbib for inspiration)
+%
+% * For lists of references with hanging indents and no numbers:
+%
+%   \begin{bibsection}
+%       \item ...
+%   \end{bibsection}
+%
+% * For numbered lists of references (with hanging indents):
+%
+%   \begin{bibenum}
+%       \item ...
+%   \end{bibenum}
+%
+%   Note that bibenum numbers continuously throughout. To reset the
+%   counter, use
+%
+%   \restartlist{bibenum}
+%
+%   at the place where you want the numbering to reset.
+
+\makeatletter
+\newlength{\bibhang}
+\setlength{\bibhang}{1em}
+\newlength{\bibsep}
+ {\@listi \global\bibsep\itemsep \global\advance\bibsep by\parsep}
+\newlist{bibsection}{itemize}{3}
+\setlist[bibsection]{label=,leftmargin=\bibhang,%
+        itemindent=-\bibhang,
+        itemsep=\bibsep,parsep=\z@,partopsep=0pt,
+        topsep=0pt}
+\newlist{bibenum}{enumerate}{3}
+\setlist[bibenum]{label=[\arabic*],resume,leftmargin={\bibhang+\widthof{[999]}},%
+        itemindent=-\bibhang,
+        itemsep=\bibsep,parsep=\z@,partopsep=0pt,
+        topsep=0pt}
+\let\oldendbibenum\endbibenum
+\def\endbibenum{\oldendbibenum\vspace{-.6\baselineskip}}
+\let\oldendbibsection\endbibsection
+\def\endbibsection{\oldendbibsection\vspace{-.6\baselineskip}}
+\makeatother
+
+%% Reference the last page in the page number
+%
+% NOTE: comment the +LP line and uncomment the -LP line to have page
+%       numbers without the ``of ##'' last page reference)
+%
+% NOTE: uncomment the \pagestyle{empty} line to get rid of all page
+%       numbers (make sure includefoot is commented out above)
+%
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+%\pagestyle{empty}      % Uncomment this to get rid of page numbers
+\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfootoffset{\marginparsep+\marginparwidth}
+\newlength{\footpageshift}
+\setlength{\footpageshift}
+          {0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
+\lfoot{\hspace{\footpageshift}%
+       \parbox{4in}{\, \hfill %
+                    \arabic{page} of \protect\pageref*{LastPage} % +LP
+%                    \arabic{page}                               % -LP
+                    \hfill \,}}
+
+% Finally, give us PDF bookmarks
+\usepackage{color,hyperref}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% HEADING AT TOP OF CURRICULUM VITAE
+
+% The title (name) with a horizontal rule under it
+% (optional argument typesets an object right-justified across from name
+%  as well)
+%
+% Usage: \makeheading{name}
+%        OR
+%        \makeheading[right_object]{name}
+%
+% Place at top of document. It should be the first thing.
+% If ``right_object'' is provided in the square-braced optional
+% argument, it will be right justified on the same line as ``name'' at
+% the top of the CV. For example:
+%
+%       \makeheading[\emph{Curriculum vitae}]{Your Name}
+%
+% will put an emphasized ``Curriculum vitae'' at the top of the document
+% as a title. Likewise, a picture could be included:
+%
+%   \makeheading[{\includegraphics[height=1.5in]{my_picture}}]{Your Name}
+%
+% the picture will be flush right across from the name. For this example
+% to work, make sure the extra set of curly braces is included. Also
+% makes ure that \usepackage{graphicx} is somewhere in the preamble.
+\newcommand{\makeheading}[2][]%
+        {\hspace*{-\marginparsep minus \marginparwidth}%
+         \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
+             {\large \bfseries #2 \hfill #1}\\[-0.15\baselineskip]%
+                 \rule{\columnwidth}{1pt}%
+         \end{minipage}}
+
+%%% SECTION HEADINGS
+
+% The section headings. Flush left in small caps down pseudo-margin.
+%
+% Usage: \section{section name}
+\renewcommand{\section}[1]{\pagebreak[3]%
+    \vspace{1.3\baselineskip}%
+    \phantomsection\addcontentsline{toc}{section}{#1}%
+    \noindent\llap{\scshape\smash{\parbox[t]{\marginparwidth}{\hyphenpenalty=10000\raggedright #1}}}%
+    \vspace{-\baselineskip}\par}
+
+%%% LISTS
+
+% This macro alters a list by removing some of the space that follows the list
+% (is used by lists below)
+\newcommand*\fixendlist[1]{%
+    \expandafter\let\csname preFixEndListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\csname preFixEndListend#1\endcsname\vspace{-0.6\baselineskip}}}
+
+% These macros help ensure that items in outer-type lists do not get
+% separated from the next line by a page break
+% (they are used by lists below)
+\let\originalItem\item
+\newcommand*\fixouterlist[1]{%
+    \expandafter\let\csname preFixOuterList#1\expandafter\endcsname\csname #1\endcsname
+    \expandafter\def\csname #1\endcsname{\let\oldItem\item\def\item{\pagebreak[2]\oldItem}\csname preFixOuterList#1\endcsname}
+    \expandafter\let\csname preFixOuterListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\let\item\oldItem\csname preFixOuterListend#1\endcsname}}
+\newcommand*\fixinnerlist[1]{%
+    \expandafter\let\csname preFixInnerList#1\expandafter\endcsname\csname #1\endcsname
+    \expandafter\def\csname #1\endcsname{\let\oldItem\item\let\item\originalItem\csname preFixInnerList#1\endcsname}
+    \expandafter\let\csname preFixInnerListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\csname preFixInnerListend#1\endcsname\let\item\oldItem}}
+
+% An itemize-style list with lots of space between items
+%
+% Usage:
+%   \begin{outerlist}
+%       \item ...    % (or \item[] for no bullet)
+%   \end{outerlist}
+\newlist{outerlist}{itemize}{3}
+    \setlist[outerlist]{label=\enskip\textbullet,leftmargin=*}
+    \fixendlist{outerlist}
+    \fixouterlist{outerlist}
+
+% An environment IDENTICAL to outerlist that has better pre-list spacing
+% when used as the first thing in a \section
+%
+% Usage:
+%   \begin{lonelist}
+%       \item ...    % (or \item[] for no bullet)
+%   \end{lonelist}
+\newlist{lonelist}{itemize}{3}
+    \setlist[lonelist]{label=\enskip\textbullet,leftmargin=*,partopsep=0pt,topsep=0pt}
+    \fixendlist{lonelist}
+    \fixouterlist{lonelist}
+
+% An itemize-style list with little space between items
+%
+% Usage:
+%   \begin{innerlist}
+%       \item ...    % (or \item[] for no bullet)
+%   \end{innerlist}
+\newlist{innerlist}{itemize}{3}
+    \setlist[innerlist]{label=\enskip\textbullet,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt}
+    \fixinnerlist{innerlist}
+
+% An environment IDENTICAL to innerlist that has better pre-list spacing
+% when used as the first thing in a \section
+%
+% Usage:
+%   \begin{loneinnerlist}
+%       \item ...    % (or \item[] for no bullet)
+%   \end{loneinnerlist}
+\newlist{loneinnerlist}{itemize}{3}
+    \setlist[loneinnerlist]{label=\enskip\textbullet,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt}
+    \fixendlist{loneinnerlist}
+    \fixinnerlist{loneinnerlist}
+
+%%% EXTRA SPACE
+
+% To add some paragraph space between lines.
+% This also tells LaTeX to preferably break a page on one of these gaps
+% if there is a needed pagebreak nearby.
+\newcommand{\blankline}{\quad\pagebreak[3]}
+\newcommand{\halfblankline}{\quad\vspace{-0.5\baselineskip}\pagebreak[3]}
+
+%%% FORMATTING MACROS
+
+% Provides a linked \doi{#1} that links doi:#1 to http://dx.doi.org/#1
+\usepackage{doi}
+% To change the text before the DOI, adjust this command
+%\renewcommand\doitext{doi:}
+
+% Provides a linked \url{#1} that doesn't require escape characters
+\usepackage{url}
+
+% You can adjust the style \url{} uses here:
+% (options are: same, rm, sf, tt; defaults to tt)
+\urlstyle{same}
+
+% For \email{ADDRESS}, links ADDRESS to the url mailto:ADDRESS
+% (uncomment to typeset the e\-/mail address in typewriter font;
+%  otherwise, will be typeset in the \urlstyle above)
+%\DeclareUrlCommand\emaillink{\urlstyle{tt}}
+\providecommand*\emaillink[1]{\nolinkurl{#1}}
+\providecommand*\email[1]{\href{mailto:#1}{\emaillink{#1}}}
+
+\providecommand\BibTeX{{B\kern-.05em{\sc i\kern-.025em b}\kern-.08em \TeX}}
+\providecommand\Matlab{\textsc{Matlab}}
+
+% Custom hyphenation rules for words that LaTeX has trouble with
+\hyphenation{bio-mim-ic-ry bio-in-spi-ra-tion re-us-a-ble pro-vid-er Media-Wiki}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\makeheading{Nicholas~Santantonio,~Ph.D.}
+
+\section{Contact Information}
+
+% NOTE: Mind where the & separators and \\ breaks are in the following
+%       table. Table is one row made up of three parboxes. The left
+%       parbox has address info, the middle parbox has a vertical bar,
+%       and the right parbox has phone and electronic contact
+%       information.
+%
+% MACROS: \rcollength is the width of the right column of the table
+%             (adjust it to your liking; default is 1.85in).
+%         \spacewidth is width of area between left and right boxes.
+%
+\newlength{\rcollength}\setlength{\rcollength}{1.85in}%
+\newlength{\spacewidth}\setlength{\spacewidth}{20pt}
+%
+\begin{tabular}[t]{@{}p{\textwidth-\rcollength-\spacewidth}@{}p{\spacewidth}@{}p{\rcollength}}%
+
+% Address box
+\parbox{\textwidth-\rcollength-\spacewidth}{%
+% Ph.D.\\
+\href{https://www.cornell.edu/}{Cornell University}\\
+\href{https://sips.cals.cornell.edu/}{School of Integrated Plant Science}\\
+\href{https://plbrgen.cals.cornell.edu/}{Section of Plant Breeding and Genetics}\\
+240 Emerson Hall\\
+Ithaca, NY 14853 USA}
+&
+% Uncomment to add a vertical bar in middle of contact information
+%{\vrule width 0.5pt}
+%\parbox[m][5\baselineskip]{\spacewidth}{} &
+
+\parbox[t]{\spacewidth}{} &
+
+
+% Non-snail-mail contact information
+\parbox{\rcollength}{
+\textit{Phone:} (505) 412 - 2738 \\
+\textit{E-mail:} \email{ns722@cornell.edu}
+}
+\end{tabular}
+
+%%
+%% In modern CV's, it seems like ``Objective'' is frowned upon. Instead,
+%% incorporate it into a well-constructed cover letter. The ``More
+%% information'' can go at the end of the CV, but it should not distract
+%% from the section giving references available to contact.
+%%
+%
+% \section{Objective}
+%
+% Placement in an academic position (i.e., faculty, postdoctoral, or
+% research scientist) that allows for advanced research in distributed
+% complex adaptive systems (i.e., modeling, analysis, design, and
+% verification) with a particular focus on the control of engineered
+% agents (e.g., for communications, control, software, electronics, and
+% sustainability) and the analysis of biological phenomena (e.g.,
+% self-organization, ecological rationality)
+% \begin{innerlist}
+% \item More information and auxiliary documents can be found at\\\url{http://www.tedpavlic.com/facjobsearch/}
+% \end{innerlist}
+
+\section{Research Interests}
+
+\textbf{Breeding methodology for maximizing genetic gain, increasing crop resiliency, and predicting plant response to stress.} Polyploid genetics, whole genome duplications, subfunctionalization, epistasis, heterosis, applications of linear mixed models, genotype by environment interaction, phenotypic stability, genomic prediction, genomic selection, haplotype-based selection, genome wide association, marker assisted breeding, high density linkage mapping, abiotic stress tolerance, productivity under drought, genotype by genotype symbiotic interactions, high throughput phenotyping, experimental design, spatial and temporal phenotypic analysis, incorporating historic data into modern analyses, breeding program optimization, public availability of genomic and phenomic data.
+
+\section{Current Appointment}
+
+\textbf{Postdoctoral Associate},
+            \href{http://www.cornell.edu/}{Cornell University}
+            \hfill {July 2018 to July 2019}
+\begin{innerlist}
+
+    \item[] \href{https://plbrgen.cals.cornell.edu/}{Plant Breeding and Genetics}
+    \begin{innerlist}
+        \item Supervisor: \href{https://blogs.cornell.edu/robbinslab/}{Professor Kelly Robbins}
+    \end{innerlist}
+
+\end{innerlist}
+
+\section{Recent Appointments}
+\textbf{T3 Data Curator},
+    \href{https://www.triticeaecap.org/}{Wheat CAP}          
+    \hfill {January 2017 to July 2018}
+    \begin{innerlist}
+
+    \item[] \href{https://triticeaetoolbox.org/}{The Triticeae Toolbox}
+    \item[] Graduate research assistantship
+    \begin{innerlist}
+    \item Supervisor: \href{https://www.ars.usda.gov/northeast-area/ithaca-ny/robert-w-holley-center-for-agriculture-health/plant-soil-and-nutrition-research/docs/jean-luc-jannink/}{Dr. Jean-Luc Jannink}
+    \end{innerlist}
+
+\end{innerlist}
+
+
+\section{Education}
+
+\href{https://www.cornell.edu/}{\textbf{Cornell University}},
+Ithaca, NY
+\begin{outerlist}
+
+\item[] Ph.D.,
+        \href{https://plbrgen.cals.cornell.edu/}
+             {Plant Breeding and Genetics},
+              August, 2018. Defense May, 2018.
+        \begin{innerlist}
+        \item Dissertation Title: \emph{Homeologous epistasis in wheat: The search for an immortal hybrid}% \\ available upon request
+        \item USDA NIFA National Needs Fellowship 2013-2016
+         \item Adviser:
+              \href{https://plbrgen.cals.cornell.edu/people/mark-sorrells}
+                   {Professor Mark Sorrells}
+        \item \href{http://stat.cornell.edu/academics/phd/phd-minor-statistics}
+        		  {Minor: Applied Statistics}
+        \item GPA: 3.958
+        \end{innerlist}
+        \halfblankline
+\end{outerlist}
+
+
+\blankline
+\href{https://www.nmsu.edu/}{\textbf{New Mexico State University}},
+Las Cruces, NM
+\begin{outerlist}
+
+\item[] M.S.,
+        \href{https://www.nmsu.edu/}
+             {Plant and Environmental Sciences}, July 2013
+        \begin{innerlist}
+        \item Thesis Title: \emph{Genetic mapping of carbon isotope discrimination in drought stressed tetraploid alfalfa (\emph{Medicago sativa} L.)}
+        \item Adviser:
+              \href{http://aces.nmsu.edu/academics/pes/ian-ray.html}
+                   {Professor Ian Ray}
+        \item \href{http://nmsu.smartcatalogiq.com/en/2014-2015/Graduate-Catalog/College-of-Business/Applied-Statistics/DEGREE-Master-of-Science/MINOR-Applied-Statistics}
+        			{Minor: Applied Statistics}
+        \item GPA: 4.0
+        \end{innerlist}
+
+\item[] B.S.,
+        \href{http://aces.nmsu.edu/academics/pes/genetics-degree.html}
+             {Genetics}, December 2010
+        \begin{innerlist}
+        \item With Honors
+        \item Minors: \href{http://nmsu.smartcatalogiq.com/en/2014-2015/Undergraduate-Catalog/College-of-Arts-and-Sciences/Chemistry-and-Biochemistry/MINORS/MINOR-Biochemistry}{Biochemistry} and \href{http://nmsu.smartcatalogiq.com/en/2014-2015/Undergraduate-Catalog/College-of-Arts-and-Sciences/Biology/MINORS/MINOR-Biology}{Biology}
+        \item GPA: 3.757
+        \end{innerlist}
+
+\end{outerlist}
+
+
+
+% \section{Submitted Journal Publications}
+%
+% % Add a little space to nudge next ``Ref'd Journal Publications'' marginpar
+% % down to make room for tall ``Submitted Journal Publications''
+% % marginpar. If there are enough submitted journal publications, this
+% % space will not be needed (and should be removed).
+% \vspace{0.1in}
+
+\section{Refereed Journal Publications}
+
+\begin{bibenum}
+
+    \item \textbf{Santantonio}, N., Jannink, J.L. and M.E. Sorrells. 2018. Prediction of subgenome additive and interaction effects in allohexaploid wheat. \emph{G3: Genes, Genomes, Genetics}. Early Online: \href{https://doi.org/10.1534/g3.118.200613}{https://doi.org/10.1534/g3.118.200613}.
+    
+    \item \textbf{Santantonio}, N., Jannink, J.L. and M.E. Sorrells. 2018. A low resolution epistasis mapping approach to identify chromosome arm interactions in allohexaploid wheat. \emph{G3: Genes, Genomes, Genetics}. Early Online: \href{https://doi.org/10.1534/g3.118.200646}{https://doi.org/10.1534/g3.118.200646}.
+
+    \item \textbf{Santantonio}, N., Pierce, C.A., Steiner, R., Ray, I.M. 2018. Genetic Mapping of Water-Use Efficiency and Carbon and Nitrogen Metabolism in Drought-Stressed Alfalfa. \emph{Crop Science}. 59(1). \href{https://dl.sciencesocieties.org/publications/cs/abstracts/0/0/cropsci2018.05.0307}{doi: 10.2135/cropsci2018.05.0307}.
+    
+    \item Kissing Kucek, L., \textbf{Santantonio}, N., Gauch, H., Dawson J., Mallory, E., Darby, H., and M.E. Sorrells. 2018. Genotype by environment interactions and local adaptations in organic wheat. \emph{Crop Science}. 59(1). \href{https://dl.sciencesocieties.org/publications/cs/abstracts/0/0/cropsci2018.02.0147}{doi: 10.2135/cropsci2018.02.0147}.
+
+    \item Ray, I.M., Han, Y., Meenach, C.D., \textbf{Santantonio}, N., Sledge, M.K., Pierce, C.A., Sterling, T.M., Kersey, R.K., Bhandari, H.S. and Monteros, M.J., 2015. Identification of Quantitative Trait Loci for Alfalfa Forage Biomass Productivity during Drought Stress. \emph{Crop Science}, 55(5), pp.2012-2033.    
+
+\end{bibenum}
+
+% Add a little space to nudge next ``Conference Publications'' marginpar
+% down to make room for tall ``Submitted Conference Publications''
+% marginpar. If there are enough submitted journal publications, this
+% space will not be needed (and should be removed).
+\vspace{0.1in}
+
+\section{Accepted Papers}
+
+\begin{bibenum}
+
+    \item Veenstra L., \textbf{Santantonio}, N., Jannink, J.L. and M.E. Sorrells. 2018. Influence of Genotype and Environment on Wheat Grain Fructan Content. \emph{Crop Science}. 
+
+\end{bibenum}
+
+\vspace{0.1in}
+
+\section{Submitted Papers}
+
+\begin{bibenum}
+    
+    % \item \textbf{Santantonio}, N., Jannink, J.L. and M.E. Sorrells. A subfunctionalization epistasis model to evaluate homeologous gene interactions in allopolyploid wheat. Target Journal: \emph{Genetics}. Submitted August 2018. BioR$\chi$iv preprint: \href{https://doi.org/10.1101/376731}{doi: 10.1101/376731}
+
+    \item \textbf{Santantonio}, N., Jannink, J.L. and M.E. Sorrells. A subfunctionalization epistasis model to evaluate homeologous gene interactions in allopolyploid wheat. Target Journal: \emph{Genetics}. Submitted August 2018. Acceptance pending on revision. BioR$\chi$iv preprint: \href{https://doi.org/10.1101/376731}{doi: 10.1101/376731}
+
+\end{bibenum}
+
+\vspace{0.1in}
+
+% \section{Papers Submitted}
+
+% \begin{bibenum}
+    
+% \end{bibenum}
+
+% \vspace{0.1in}
+
+% \section{Papers in Preparation}
+
+% \begin{bibenum}
+% %    \item Santantonio, N., Jannink, J.L. and M.S. Sorrells. Partitioning genetic variance to exploit additive effects and heterosis across the sub-genomes of an allopolyploid. Target Journal: Proceedings of the National Academy of Science. Expected submission date: February 2017
+% %
+%     \item Santantonio, N., Jannink, J.L. and M.E. Sorrells. In Progress. A low resolution epistasis mapping approach for identifying chromosome arm interactions in allohexaploid wheat. Target Journal: \emph{Genetics}. Expected submission date: June 2018. Draft available upon request.
+
+%     \item Santantonio, N., Jannink, J.L. and M.E. Sorrells. In Progress. Prediction of subgenome additive and interaction effects in allohexaploid wheat. Target Journal: \emph{Genetics}. Expected submission date: May 2018. Draft available upon request.
+
+%     \item Santantonio, N., Jannink, J.L. and M.E. Sorrells. In Progress. A subfunctionalization epistasis model to evaluate homeologous gene interactions in allopolyploid wheat. Target Journal: \emph{Genetics}. Expected submission date: May 2018. Draft available upon request.
+
+%     % \item Santantonio, N., Kissing Kucek, L. and M.E. Sorrells. In Progress. Bilinear: an R package for fitting AMMI and GGE bilinear models, statistical tests for dimensionality and associated plots. Target Journal: \emph{Crop Science}. Expected submission date: Summer 2018. Package currently accessible in Github at \href{https://github.com/nsantantonio/Bilinear} {https://github.com/nsantantonio/Bilinear} .
+
+
+% \end{bibenum}
+
+% \section{Papers planned}
+%     \begin{bibenum}
+
+%     \item Santantonio, N., Jannink, J.L. and M.E. Sorrells. Planned. Low resolution epistasis mapping in allohexaploid wheat. Target Journal: \emph{Theoretical and Applied Genetics}. Expected submission date: Summer 2018. 
+    
+%     \item Santantonio, N., Jannink, J.L. and M.E. Sorrells. Planned. The contribution of sub-genomes to phenotypic stability in allohexaploid wheat. Target Journal: \emph{Theoretical and Applied Genetics}. Expected submission date: Summer 2018. 
+%     \end{bibenum}
+
+\section{Conference Talks}
+
+\begin{bibenum}
+
+\item Santantonio, N., Jannink, J.L. and M.S. Sorrells. Homeologous epistasis in allohexaploid wheat: The search for an immortal hybrid. In: \emph{National Association of Plant Breeders Annual Meeting (NAPB~2018)}. \href{https://www.plant.uoguelph.ca/napb/abstracts-posters}{Abstract}, August 7--10, 2018.
+
+\item Santantonio, N., Jannink, J.L. and M.S. Sorrells.  Implications of Homeologous Gene Interactions for Breeding Allopolyploid Crops. In: \emph{Plant and Animal Genome Conference  XXVI (PAG~2018)} CSSA: Translational Genomics Workshop. \href{https://pag.confex.com/pag/xxvi/meetingapp.cgi/Paper/28461} {Abstract}, January 13--17, 2018.
+
+\end{bibenum}
+
+\section{Conference Posters}
+
+\begin{bibenum}
+
+    \item Santantonio, N., Jannink, J.L. and M.S. Sorrells. The contribution of homeologous gene interactions to the genetic variance of allopolyploid wheat. In: \emph{Population, Evolution and Quantitative Genetics Conference (PEQ~2018)}, May 13--17, 2018. \href{http://conferences.genetics-gsa.org/peqg/2018/pdf/2018PEQGFullAbstracts.pdf} {Poster abstract}.
+
+    \item Santantonio, N., Jannink, J.L. and M.S. Sorrells. Partitioning genetic variance to exploit additive effects and heterosis across the sub-genomes of allopolyploid wheat (\emph{Triticum aestivum}). In: \emph{National Association of Plant Breeding Annual Meeting Improving Efficiency in Breeding Programs (NAPB~2016)}, August 15--18, 2016. Poster abstract.
+
+	\item Santantonio, N., Jannink, J.L. and M.S. Sorrells. Modeling sub-genome by environment interaction in allohexaploid wheat (\emph{Triticum aestivum}) In: \emph{5th International Conference on Quantitative Genetics  (ICQG5~2016)}, June 12--17, 2016. Poster abstract.
+
+	\item Santantonio, N., Jannink, J.L. and M.S. Sorrells. Modeling genome by environment interaction in allohexaploid wheat (\emph{Triticum aestivum}) In: \emph{Plant and Animal Genome Conference  XXIV (PAG~2016)}, January 8--13, 2016. Poster abstract.
+
+	\item  Santantonio, N., C.A. Pierce and  I.M. Ray. Genetic mapping of carbon isotope discrimination in drought stressed tetraploid alfalfa (\emph{Medicago sativa} L.) In: \emph{North American Alfalfa Improvement Conference (NAAIC~2014)}, July 8-10, 2014. Poster abstract.
+
+\end{bibenum}
+
+
+\section{Talks Available Online}
+\begin{bibenum}
+
+    \item Santantonio, Nicholas. ``Implications of Homeologous Gene Interactions for Breeding Allopolyploid Crops". Exit Seminar. Cornell University, Ithaca NY. March 22, 2018.  \href{https://www.youtube.com/watch?v=aq4fAXO1iPg} {Youtube video link}.
+
+    \item Santantonio, Nicholas. ``Some thoughts on epistasis in allopolyploids" Graduate Student Presentations. Cornell University, Ithaca NY. May 9, 2017.  \href{https://www.youtube.com/watch?v=gto8g6B3VsQ&t=48s&index=4&list=PLHPXm2Es8aQAIzSUe2l_sNQQdj8chGLrW} {Youtube video link}.
+
+\end{bibenum}
+
+\halfblankline
+
+\section{Expertise}
+
+Quantitative Genetics:
+%
+\begin{innerlist}
+	\item Theory development
+	\item Simulation of genetic systems
+	\item Autopolyploid and allopolyploid genetics
+	\item Modeling dominance and epistatic interactions
+\end{innerlist}
+
+\halfblankline
+
+Statistics:
+%
+\begin{innerlist}
+    \item Experimental design and analysis 
+    \item Generalized linear models
+    \item Various structured/unstructured effect and/or error correlation/covariance models
+    \item Analysis of spatially and/or temporally correlated data
+\end{innerlist}
+
+\halfblankline
+
+Molecular Breeding:
+\begin{innerlist}
+    \item Single and multiple trait genomic selection (GS)
+	\item Genome wide association (GWAS) for gene discovery
+	\item Linkage map construction and biparental QTL mapping in diploids and polyploids
+%	\item Biparental QTL mapping in diploids and polyploids
+\end{innerlist}
+
+\halfblankline
+
+Field:
+\begin{innerlist}
+\item Observation of plant phenology and abiotic stress progression for timing tissue sampling, data collection and harvest 
+\item Plot combine, plot flail harvester and small tractor operation and maintenance
+\item Electronic and manual data collection
+\item Crossing designs, seed production, cleaning, organization, storage and planting 
+\end{innerlist}
+
+% \pagebreak
+
+\section{Software and Programming Skills}
+%
+Computer Programming and Numerical Analysis:
+%
+\begin{innerlist}
+    \item R for data formatting, analysis, simulation and plotting
+    \item Unix shell scripting (bash) for file processing, parallelization and pipelines
+    \item \LaTeX{} for documents, presentations and posters (examples available upon request)
+    \item ASReml for fitting complex variance structures
+    \item Experience with various quantitative genetics and bioinformatics tools 
+    \item Limited experience with relational databases 
+\end{innerlist}
+\halfblankline
+
+R skill set:
+%
+\begin{innerlist}
+    \item Genetic systems / breeding scheme simulation % including \emph{in silico} chromosome structure, crossing over, mating, phenotypic evaluation and selection 
+    \item Imputation
+	\item Flexible software package design
+	\item Unique figure construction 
+    \item Parallel computing
+\end{innerlist}
+\halfblankline
+
+R packages:
+\begin{innerlist}
+    \item Bilinear
+	\begin{innerlist}   
+		\item Package to fit AMMI and GGE bilinear models for multi-environment trial data
+   		\item Statistical tests for G$\times$E dimensionality selection
+    	\item Plotting functions for determining winning genotypes within mega-environments 
+    	\item Currently accessible on Github at  \href{https://github.com/nsantantonio/Bilinear} {https://github.com/nsantantonio/Bilinear}
+	\end{innerlist}
+\end{innerlist}
+
+\halfblankline
+
+Operating Systems:
+%
+\begin{innerlist}
+    \item Linux, Mac OS X, Microsoft Windows
+\end{innerlist}
+
+\pagebreak
+
+\section{Fellowships and Awards}
+
+\href{https://www.cornell.edu}{Cornell University}
+%\begin{innerlist}
+
+\begin{innerlist}
+\item \href{https://nifa.usda.gov/}{USDA, NIFA} \href{https://nifa.usda.gov/program/national-needs-graduate-and-postgraduate-fellowship-grants-program-funding-opportunity-nnf}{National Needs Graduate Fellowship}, August 2013-- May 2016
+\end{innerlist}
+
+\halfblankline
+
+\href{https://www.nsmu.edu}{New Mexico State University}
+\begin{innerlist}
+\item \href{http://ovpr.research.nmsu.edu/GREG}
+           {Graduate Research Enhancement Grant (GREG) award}
+           1 year M.S. research assistantship provided through the NMSU Vice President of Research, 2011
+
+\item Outstanding Graduating Senior in Plant and Environmental Sciences 2011 
+\item Dr. Don and Mrs. Fran Cotter Scholarship Undergraduate Research Award.  \emph{Impact of a Water-Use Efficiency Gene on Forage Yield in Alfalfa}. 2010 
+\item Crimson Scholar Work-Study funding for undergraduate research assistantship 2010 
+\end{innerlist}
+
+
+\section{Scholarships and Honors}
+
+\href{https://www.nsmu.edu}{New Mexico State University}
+\begin{innerlist}
+\item NM Dry Onion Commission Scholarship 2012 
+\item Lucky Day Scholarship 2012 
+\item Dr. Billy Melton Scholarship 2011 and 2012 
+\item Marvin Wilson Memorial Scholarship 2011 
+\item Joe \& Daisy Corgan Scholarship 2009, 2010 and 2012 
+\item John Allen Carter Scholarship 2009 
+\item Crimson Scholar, Honors College 2009 and 2010 
+\item Deans List, College of Agricultural, Consumer and Environmental Sciences  2007-2010
+\end{innerlist}
+
+
+\section{Teaching Experience}
+
+
+\href{https://www.cornell.edu/}{\textbf{Cornell University}},
+Ithaca, NY
+\begin{outerlist}
+\item[] \textit{Teaching Assistant}%
+    \hfill August 2017 to December 2017\\
+   % (sample graded material and student evaluations available upon request)
+    \begin{innerlist}
+        \item Primary TA for PLBRG 2010: Plants, Genes and Global Food Production
+        \begin{innerlist}
+            \item Fall~2017
+            \item Coordinating hands-on labs and scheduling guest lecturers
+            \item Review and compilation of specialized reading material 
+			\item Grading weekly in-class assignments/homework 
+            \item Exam development/revision and proctoring
+            \item Blackboard site construction and maintenance
+            \item Lectures: ``Clonally Propagated Crops'' and ``Using Models for Breeding''
+        \end{innerlist}
+    \end{innerlist}
+    % \pagebreak
+
+\item[] \textit{Teaching Assistant}%
+    \hfill August 2016 to May 2017\\
+   % (sample graded material and student evaluations available upon request)
+    \begin{innerlist}
+        \item Section Instructor for BIOMG 1350: Introductory Biology: Cell and Developmental\\ Biology
+        \begin{innerlist}
+            \item Fall~2016 and Spring~2017
+            % \item Sample student evaluations available upon request.
+            \item Responsible for leading 4 1-hour activity based learning sections per week 
+             \item Grading weekly in-class assignments and homework 
+            \item Exam revision and proctoring
+        \end{innerlist}
+    \end{innerlist}
+
+
+\item[] \textit{Discussion Facilitator}%
+    \hfill September 2015 to January 2016\\
+    \begin{innerlist}
+        \item Student invited facilitator of discussion group based on plant breeding text book
+        \begin{innerlist}
+            \item Bernardo, R., 2002. Breeding for quantitative traits in plants (No. 576.5 B523). Stemma Press.
+            % \item Sample student evaluations available upon request.
+            \item Discussion groups once per week per chapter for 13 chapters
+        \end{innerlist}
+        \end{innerlist}        
+        
+\end{outerlist}
+%
+%\href{https://www.nmsu.edu/}{\textbf{New Mexico State University}},
+%Las Cruces, NM
+%\begin{outerlist}
+%\item[] \textit{Guest lecturer}%
+%    \hfill August 29, 2012\\
+%   % (sample graded material and student evaluations available upon request)
+%    \begin{innerlist}
+%        \item GENE 110: Experimental Systems in Genetics
+%        \end{innerlist}
+%
+%\item[] \textit{Substitute lecturer}%
+%    \hfill September 11 and 13, 2012 \\
+%   % (sample graded material and student evaluations available upon request)
+%    \begin{innerlist}
+%        \item GENE 315: Molecular Genetics
+%        \end{innerlist}
+%\end{outerlist}
+
+\section{Professional Memberships}
+
+\href{http://www.genetics-gsa.org/}{Genetics Society of America}~(2018--present)%
+
+\href{https://www.plantbreeding.org/}{National Association of Plant Breeders}~(2016--present)%
+
+
+\section{Graduate Student Organizations}
+
+\textbf{Cornell University, Ithaca, NY}
+
+    Synapsis Plant Breeding and Genetics Graduate Student Organization
+    \begin{innerlist}
+        \item Member 2013--2018
+        \item Social Chair 2015--2017
+        \item Historian 2015--2017
+    \end{innerlist}
+
+% \end{lonelist}
+
+\blankline
+% \vspace{1mm}
+% \halfblankline
+
+\textbf{New Mexico State University, Las Cruces, NM}
+
+    Plant and Environmental Sciences Graduate Student Organization
+    \begin{innerlist}
+        \item Member 2012
+    \end{innerlist}    	
+% \end{lonelist}
+
+% \halfblankline
+
+% \section{Community Service}
+
+% New Mexico State FFA Crop Judging Contest 2008-2012 
+% \begin{innerlist}
+%    \item Assistant proctor
+% \end{innerlist}	
+
+% \halfblankline
+
+% New Mexico Alliance for Minority Participation Research Conference 9/30/2011  
+% \begin{innerlist}
+%    \item Poster Judge
+% \end{innerlist}
+%
+% %
+% \pagebreak
+
+
+\section{References Available to Contact}
+
+% \href
+% {https://plbrgen.cals.cornell.edu/people/kelly-robbins-0/}
+% {\textbf{Dr.~Mark~Sorrells}}
+% (e\-/mail:~\href{mailto:mes12@cornell.edu}{krr73@cornell.edu}; phone:~(607) 255-8819
+% %
+% \begin{innerlist}
+%     \item Professor,
+%         \href{https://plbrgen.cals.cornell.edu/}{Plant Breeding and Genetics},
+      
+
+%     \item[$\diamond$]   \href{https://www.cornell.edu/}{Cornell University}, Ithaca, NY 14853
+
+%     \item[$\star$] \emph{Dr.~Robbins is my current postdoctoral adviser.}
+% \end{innerlist}
+
+% \halfblankline
+
+\href
+{https://plbrgen.cals.cornell.edu/people/mark-sorrells}
+{\textbf{Dr.~Mark~Sorrells}}
+(e\-/mail:~\href{mailto:mes12@cornell.edu}{mes12@cornell.edu}; phone:~(607) 342-5015
+%
+\begin{innerlist}
+    \item Professor,
+        \href{https://plbrgen.cals.cornell.edu/}{Plant Breeding and Genetics},
+      
+
+    \item[$\diamond$]   \href{https://www.cornell.edu/}{Cornell University}, Ithaca, NY 14853
+
+    \item[$\star$] \emph{Dr.~Sorrells was my PhD adviser.}
+\end{innerlist}
+
+\halfblankline
+
+\href
+{https://plbrgen.cals.cornell.edu/people/jean-luc-jannink}
+{\textbf{Dr.~Jean-Luc~Jannink}}
+(e\-/mail:~\href{mailto:JeanLuc.Jannink@ars.usda.gov }{JeanLuc.Jannink@ars.usda.gov }; phone:~(607) 255-5266
+%
+\begin{innerlist}
+    \item Adjunct Professor,
+        \href{https://www.ars.usda.gov/}{USDA ARS},
+        \href{https://www.ars.usda.gov/northeast-area/ithaca-ny/robert-w-holley-center-for-agriculture-health/}{Robert W. Holley Center for Agriculture \& Health}
+%       
+   \item[$\diamond$]  \href{https://www.cornell.edu/}{Cornell University}, Ithaca, NY 14853
+
+    \item[$\star$] \emph{Dr.~Jannink was a committee member for my PhD and my supervisor at T3.}
+\end{innerlist}
+
+\halfblankline
+
+\href
+{http://aces.nmsu.edu/academics/pes/ian-ray.html}
+{\textbf{Dr.~Ian~Ray}}
+(e\-/mail:~\href{mailto:iaray@nmsu.edu}{iaray@nmsu.edu}; phone:~(575) 646-3819
+%
+\begin{innerlist}
+    \item Professor,
+        \href{http://aces.nmsu.edu/academics/pes/}{Plant and Environmental Sciences}
+    \item[$\diamond$]  \href{https://www.nmsu.edu/}{New Mexico State University}, Las Cruces, NM 88003
+    \item[$\star$] \emph{Dr.~Ray was my undergraduate and Master's adviser.}
+\end{innerlist}
+\halfblankline
+
+
+
+\href
+{https://plbrgen.cals.cornell.edu/people/susan-mccouch}
+{\textbf{Dr.~Susan~McCouch}}
+(e\-/mail:~\href{mailto:srm4@cornell.edu}{srm4@cornell.edu}; phone:~(607) 255-0420
+%
+\begin{innerlist}
+    \item Professor,
+        \href{https://plbrgen.cals.cornell.edu/}{Plant Breeding and Genetics},
+      
+
+    \item[$\diamond$]   \href{https://www.cornell.edu/}{Cornell University}, Ithaca, NY 14853
+
+    \item[$\star$] \emph{Dr.~McCouch is the instructor of the course, PLBRG2010, I TA'ed in Fall 2017.}
+\end{innerlist}
+
+\halfblankline
+
+% \href
+% {https://mbg.cornell.edu/people/tim-huffaker}
+% {\textbf{Dr.~Tim~Huffaker}}
+% (e\-/mail:~\href{mailto:tch4@cornell.edu}{tch4@cornell.edu}; phone:~(607) 255-9947
+% %
+% \begin{innerlist}
+%     \item Professor,
+%         \href{https://mbg.cornell.edu/}{Molecular Biology and Genetics},
+      
+
+%     \item[$\diamond$]   \href{https://www.cornell.edu/}{Cornell University}, Ithaca, NY 14853
+
+%     \item[$\star$] \emph{Dr.~Huffaker was the instructor of the course I was a TA for Fall 2016.}
+% \end{innerlist}
+
+% \halfblankline
+
+% \href
+% {http://aces.nmsu.edu/academics/pes/christopher-s-cramer.html}
+% {\textbf{Dr.~Chris~Cramer}}
+% (e\-/mail:~\href{mailto: cscramer@nmsu.edu}{ cscramer@nmsu.edu}; phone:~(575) 646-2657
+% %
+% \begin{innerlist}
+%     \item Professor,
+%         \href{http://aces.nmsu.edu/academics/pes/}{Plant and Environmental Sciences}
+%     \item[$\diamond$]  \href{https://www.nmsu.edu/}{New Mexico State University}, Las Cruces, NM 88003
+%     \item[$\star$] \emph{Dr.~Cramer was my supervisor as an undergraduate research assistant 2006-2007.}
+% \end{innerlist}
+
+\vspace{0.3cm}
+*Can provide additional references upon request.\\
+\section{Citizenship}
+United States of America 
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% End CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------%
+% The following is copyright and licensing information for
+% redistribution of this LaTeX source code; it also includes a liability
+% statement. If this source code is not being redistributed to others,
+% it may be omitted. It has no effect on the function of the above code.
+%----------------------------------------------------------------------%
+% Copyright (c) 2007, 2008, 2009, 2010, 2011 by Theodore P. Pavlic
+%
+% Unless otherwise expressly stated, this work is licensed under the
+% Creative Commons Attribution-Noncommercial 3.0 United States License. To
+% view a copy of this license, visit
+% http://creativecommons.org/licenses/by-nc/3.0/us/ or send a letter to
+% Creative Commons, 171 Second Street, Suite 300, San Francisco,
+% California, 94105, USA.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+% OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+% MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+% IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+% CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+% TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+% SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+%----------------------------------------------------------------------%
