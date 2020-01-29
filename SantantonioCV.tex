@@ -138,20 +138,11 @@
 
 % Provides a linked \doi{#1} that links doi:#1 to http://dx.doi.org/#1
 \usepackage{doi}
-% To change the text before the DOI, adjust this command
-%\renewcommand\doitext{doi:}
 
-% Provides a linked \url{#1} that doesn't require escape characters
 \usepackage{url}
 
-% You can adjust the style \url{} uses here:
-% (options are: same, rm, sf, tt; defaults to tt)
 \urlstyle{same}
 
-% For \email{ADDRESS}, links ADDRESS to the url mailto:ADDRESS
-% (uncomment to typeset the e\-/mail address in typewriter font;
-%  otherwise, will be typeset in the \urlstyle above)
-%\DeclareUrlCommand\emaillink{\urlstyle{tt}}
 \providecommand*\emaillink[1]{\nolinkurl{#1}}
 \providecommand*\email[1]{\href{mailto:#1}{\emaillink{#1}}}
 
@@ -159,9 +150,7 @@
 \providecommand\Matlab{\textsc{Matlab}}
 
 % Custom hyphenation rules for words that LaTeX has trouble with
-\hyphenation{bio-mim-ic-ry bio-in-spi-ra-tion re-us-a-ble pro-vid-er Media-Wiki}
-
-%%%%%%%%%%%%%%%%%%%%%%%% End Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hyphenation{sub-gen-ome}
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -170,16 +159,7 @@
 
 \section{Contact Information}
 
-% NOTE: Mind where the & separators and \\ breaks are in the following
-%       table. Table is one row made up of three parboxes. The left
-%       parbox has address info, the middle parbox has a vertical bar,
-%       and the right parbox has phone and electronic contact
-%       information.
-%
-% MACROS: \rcollength is the width of the right column of the table
-%             (adjust it to your liking; default is 1.85in).
-%         \spacewidth is width of area between left and right boxes.
-%
+
 \newlength{\rcollength}\setlength{\rcollength}{1.85in}%
 \newlength{\spacewidth}\setlength{\spacewidth}{20pt}
 %
@@ -199,34 +179,12 @@ Ithaca, NY 14853 USA}
 %\parbox[m][5\baselineskip]{\spacewidth}{} &
 
 \parbox[t]{\spacewidth}{} &
-
-
 % Non-snail-mail contact information
 \parbox{\rcollength}{
 \textit{Phone:} (505) 412 - 2738 \\
 \textit{E-mail:} \email{ns722@cornell.edu}
 }
 \end{tabular}
-
-%%
-%% In modern CV's, it seems like ``Objective'' is frowned upon. Instead,
-%% incorporate it into a well-constructed cover letter. The ``More
-%% information'' can go at the end of the CV, but it should not distract
-%% from the section giving references available to contact.
-%%
-%
-% \section{Objective}
-%
-% Placement in an academic position (i.e., faculty, postdoctoral, or
-% research scientist) that allows for advanced research in distributed
-% complex adaptive systems (i.e., modeling, analysis, design, and
-% verification) with a particular focus on the control of engineered
-% agents (e.g., for communications, control, software, electronics, and
-% sustainability) and the analysis of biological phenomena (e.g.,
-% self-organization, ecological rationality)
-% \begin{innerlist}
-% \item More information and auxiliary documents can be found at\\\url{http://www.tedpavlic.com/facjobsearch/}
-% \end{innerlist}
 
 \section{Research Interests}
 
@@ -333,25 +291,9 @@ Las Cruces, NM
         \end{innerlist}
 
 \end{outerlist}
-%  (chronological order; most recent one first)
-% Grant # (PI Name)
-% Name of Funding Organization (no acronyms)
-% Amount Awarded
-% Period of Grant Award
-% Ttitel of grant
-% Role on Project (if not the PI)
-
 
 
 \section{Submitted Publications}
-%
-% % Add a little space to nudge next ``Ref'd Journal Publications'' marginpar
-% % down to make room for tall ``Submitted Journal Publications''
-% % marginpar. If there are enough submitted journal publications, this
-% % space will not be needed (and should be removed).
-% \vspace{0.1in}
-
-
 
 \begin{bibenum}
 
@@ -362,17 +304,12 @@ Las Cruces, NM
     \item Morales, N., Kaczmar, N.S., \textbf{Santantonio}, N., Gore, M.A., Mueller, L.A. and K.R. Robbins 2020. ImageBreed: open-access plant breeding web-database for image based phenotyping. \emph{The Plant Phenome}. Submitted December 15, 2019. Draft available upon request.
 
     
-%     % \item \textbf{Santantonio}, N., Jannink, J.L. and M.E. Sorrells. A subfunctionalization epistasis model to evaluate homeologous gene interactions in allopolyploid wheat. Target Journal: \emph{Genetics}. Submitted August 2018. BioR$\chi$iv preprint: \href{https://doi.org/10.1101/376731}{doi: 10.1101/376731}
-
-%     \item \textbf{Santantonio}, N., Jannink, J.L. and M.E. Sorrells. Homeologous epistasis in wheat: the search for an immortal hybrid. \emph{Genetics}. Accepted January 2019. BioR$\chi$iv preprint: \href{https://doi.org/10.1101/376731}{https://doi.org/10.1101/376731}
 
 \end{bibenum}
 
 \section{Publications}
 
 \begin{bibenum}
-
-    % \item \textbf{Santantonio}, N., Jannink, J.L. and M.E. Sorrells. 2019. Homeologous epistasis in wheat: the search for an immortal hybrid. \emph{Genetics} (cover article). 211(3) 1105--1122 \\ \href{https://doi.org/10.1534/genetics.118.301851}{https://doi.org/10.1534/genetics.118.301851}
 
     \item \textbf{Santantonio}, N., Jannink, J.L. and M.E. Sorrells. 2019. Homeologous epistasis in wheat: the search for an immortal hybrid. \emph{Genetics} (cover article). 211(3) 1105--1122. \\ \doi{10.1534/genetics.118.301851}
 
@@ -390,56 +327,7 @@ Las Cruces, NM
 
 \end{bibenum}
 
-% Add a little space to nudge next ``Conference Publications'' marginpar
-% down to make room for tall ``Submitted Conference Publications''
-% marginpar. If there are enough submitted journal publications, this
-% space will not be needed (and should be removed).
-% \vspace{0.1in}
-
-% \section{Accepted Papers}
-
-% \begin{bibenum}
-
-%     \item Veenstra L., \textbf{Santantonio}, N., Jannink, J.L. and M.E. Sorrells. 2018. Influence of Genotype and Environment on Wheat Grain Fructan Content. \emph{Crop Science}. doi: doi:10.2135/cropsci2018.06.0363
-
-% \end{bibenum}
-
-% \vspace{0.1in}
-
-
 \vspace{0.1in}
-
-% \section{Papers Submitted}
-
-% \begin{bibenum}
-    
-% \end{bibenum}
-
-% \vspace{0.1in}
-
-% \section{Papers in Preparation}
-
-% \begin{bibenum}
-% %    \item Santantonio, N., Jannink, J.L. and M.S. Sorrells. Partitioning genetic variance to exploit additive effects and heterosis across the sub-genomes of an allopolyploid. Target Journal: Proceedings of the National Academy of Science. Expected submission date: February 2017
-% %
-%     \item Santantonio, N., Jannink, J.L. and M.E. Sorrells. In Progress. A low resolution epistasis mapping approach for identifying chromosome arm interactions in allohexaploid wheat. Target Journal: \emph{Genetics}. Expected submission date: June 2018. Draft available upon request.
-
-%     \item Santantonio, N., Jannink, J.L. and M.E. Sorrells. In Progress. Prediction of subgenome additive and interaction effects in allohexaploid wheat. Target Journal: \emph{Genetics}. Expected submission date: May 2018. Draft available upon request.
-
-%     \item Santantonio, N., Jannink, J.L. and M.E. Sorrells. In Progress. A subfunctionalization epistasis model to evaluate homeologous gene interactions in allopolyploid wheat. Target Journal: \emph{Genetics}. Expected submission date: May 2018. Draft available upon request.
-
-%     % \item Santantonio, N., Kissing Kucek, L. and M.E. Sorrells. In Progress. Bilinear: an R package for fitting AMMI and GGE bilinear models, statistical tests for dimensionality and associated plots. Target Journal: \emph{Crop Science}. Expected submission date: Summer 2018. Package currently accessible in Github at \href{https://github.com/nsantantonio/Bilinear} {https://github.com/nsantantonio/Bilinear} .
-
-
-% \end{bibenum}
-
-% \section{Papers planned}
-%     \begin{bibenum}
-
-%     \item Santantonio, N., Jannink, J.L. and M.E. Sorrells. Planned. Low resolution epistasis mapping in allohexaploid wheat. Target Journal: \emph{Theoretical and Applied Genetics}. Expected submission date: Summer 2018. 
-    
-%     \item Santantonio, N., Jannink, J.L. and M.E. Sorrells. Planned. The contribution of sub-genomes to phenotypic stability in allohexaploid wheat. Target Journal: \emph{Theoretical and Applied Genetics}. Expected submission date: Summer 2018. 
-%     \end{bibenum}
 
 \section{Invited Talks}
 
@@ -525,7 +413,6 @@ Statistics
 %     % \item Analysis of genetically, spatially and/or temporally correlated data
 %     % \item Various other structured/unstructured effect and/or error correlation/covariance models
 % \end{innerlist}
-
 
 \halfblankline
 
